@@ -15,7 +15,6 @@ def solution(n, arr1, arr2):
 	arr = []
 	brr = []
 	crr = [[0 for i in range(n)] for j in range(n)]		# crr = [[0]*n] * n  (python에서 배열 생성시 동작 방식의 차이가 있다.)
-	print(crr)
 	for a in arr1:
 		arr.append(changeBinary(a, n))
 	for b in arr2:
@@ -24,10 +23,8 @@ def solution(n, arr1, arr2):
 		for j in range(0, n):
 			k = arr[i][j] + brr[i][j]
 			if k == 0:
-				print(i,j)
 				crr[i][j] = ' '
 			else:
-				print(i,j)
 				crr[i][j] = '#'
 	for i in range(0, n):
 		answer.append(''.join(crr[i]))
