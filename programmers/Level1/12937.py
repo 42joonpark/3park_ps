@@ -1,3 +1,4 @@
+# 짝수와 홀수
 def solution(num):
 	answer = ''
 	if (num % 2 == 0):

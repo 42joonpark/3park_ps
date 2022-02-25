@@ -1,3 +1,4 @@
+# 핸드폰 번호 가리기
 def solution(phone_number):
 	answer = ''
 	i = len(phone_number)

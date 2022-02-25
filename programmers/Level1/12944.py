@@ -1,3 +1,4 @@
+# 콜라츠추측
 def solution(num):
 	answer = 0
 	while (True):
