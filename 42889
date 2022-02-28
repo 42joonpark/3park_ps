@@ -1,0 +1,31 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool compare(pair<int, double> &a, pair<int, double> &b)
+{
+    return a.second == b.second ? a.first < b.first : a.second > b.second ? true : false;
+}
+
+vector<int> solution(int N, vector<int> stages) {
+    vector<pair<int, double>> answer(N);
+    int tmp = stages.size();
+    
+    for (int i = 0; i < N; ++i) {
+        int num = count(stages.begin(), stages.end(), i + 1);
+        answer[i].first = i + 1;
+        if (tmp != 0)
+        	answer[i].second = num / (double)tmp;
+        else
+            answer[i].second = 0.0;
+        tmp -= num;
+    }
+    sort(answer.begin(), answer.end(), compare);
+    vector<int> d;
+    for (int i = 0; i < answer.size(); ++i) {
+        d.push_back(answer[i].first);
+    }
+    return d;
+}
