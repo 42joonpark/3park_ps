@@ -1,0 +1,10 @@
+using namespace std;
+
+long long solution(int price, int money, int count)
+{
+    long long res = money;
+    for (int i = 1; i <= count; ++i) {
+        res -= i * price;
+    }
+    return res < 0 ? res * -1 : 0;
+}
