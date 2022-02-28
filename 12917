@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+string solution(string s) {
+    string answer = "";
+    vector<int> arr(52);
+    for (auto i = s.begin(); i != s.end(); ++i) {
+        if (*i < 'a') {
+            arr[*i - 'A']++;
+        }
+        else {
+            arr[26 + *i - 'a']++;
+        }
+    }
+    for (int i = 52; i >= 0; --i) {
+        for (int k = 0; k < arr[i]; ++k) {
+            if (i > 25) {
+                answer += 'a' + (i - 26);
+            } else {
+                answer += 'A' + i;
+            }
+        }
+    }
+    return answer;
+}
