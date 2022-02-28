@@ -1,0 +1,19 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<vector<int>> sizes) {
+    int answer = 0;
+    int m = 0;
+    int n = 0;
+    for (int i = 0; i < sizes.size(); ++i) {
+        int big = sizes[i][0] > sizes[i][1] ? sizes[i][0] : sizes[i][1];
+        int small = sizes[i][0] > sizes[i][1] ? sizes[i][1] : sizes[i][0];
+        if (big > m)
+            m = big;
+        if (small > n)
+            n = small;
+    }
+    return m * n;
+}
