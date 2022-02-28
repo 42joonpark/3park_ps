@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> solution(vector<int> arr) {
+    vector<int> answer;
+    if (arr.size() > 1) {
+        /*
+        int a = 0;
+        for (int i = 1; i < arr.size(); ++i) {
+            if (arr[a] > arr[i])
+                a = i;
+        }
+        arr.erase(arr.begin() + a);
+        answer = arr;
+        */
+        sort(arr.begin(), arr.end(), greater<>());
+        arr.pop_back();
+        answer = arr;
+    } else
+        answer.push_back(-1);
+    return answer;
+}
