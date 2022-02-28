@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+bool comapre(string &s1, string &s2, int n)
+{
+    if (s1[n] > s2[n])
+        return true;
+    else if (s1[n] < s2[n])
+        return false;
+    else
+        return s1 > s2;
+}
+
+vector<string> solution(vector<string> strings, int n) {
+    vector<string> answer;
+    while (strings.size() > 0) {
+        int c = 0;
+        for (int k = 1; k < strings.size(); ++k) {
+            if (comapre(strings[c], strings[k], n))
+                c = k;
+        }
+        answer.push_back(strings[c]);
+        strings.erase(strings.begin() + c);
+    }
+    return answer;
+}
