@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<string> t = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+
+int solution(string s) {
+    int answer = 0;
+    for (int i = 0; i < s.size(); ++i) {
+        if (isdigit(s[i])) {
+            answer *= 10;
+            answer += s[i] - '0';
+        } else {
+            for (int k = 0; k < 10; ++k) {
+                string tmp = s.substr(i, t[k].size());
+                if (tmp == t[k]) {
+                    answer *= 10;
+                    answer += k;
+                }
+            }
+        }
+    }
+    return answer;
+}
