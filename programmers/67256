@@ -1,0 +1,72 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+// 1, 4, 7, 2, 5, 8, 0, *
+int Move[8][8] = {
+    {0, 1, 2, 1, 2, 3, 4, -1},
+    {1, 0, 1, 2, 1, 2, 3, -1},
+    {2, 1, 0, 3, 2, 1, 2, -1},
+    {1, 2, 3, 0, 1, 2, 3, -1},
+    {2, 1, 2, 1, 0, 1, 2, -1},
+    {3, 2, 1, 2, 1, 0, 1, -1},
+    {4, 3, 2, 3, 2, 1, 0, -1},
+    {3, 2, 1, 4, 3, 2, 1, 0},
+};
+
+enum NUM {
+    FIRST = 0,
+    SECOND,
+    THIRD,
+    TWO,
+    FIVE,
+    EIGHT,
+    ZERO,
+    START
+};
+
+string solution(vector<int> numbers, string hand) {
+    string answer = "";
+    int L = START;
+    int R = START;
+    for (auto n : numbers) {
+        if (n == 1 || n == 4 || n == 7) {
+            answer += 'L';
+            if (n == 1) L = FIRST;
+            if (n == 4) L = SECOND;
+            if (n == 7) L = THIRD;
+        } else if (n == 3 || n == 6 || n == 9) {
+            answer += 'R';
+            if (n == 3) R = FIRST;
+            if (n == 6) R = SECOND;
+            if (n == 9) R = THIRD;
+        } else {
+            int l, r, idx;
+            if (n == 2) idx = TWO;
+            if (n == 5) idx = FIVE;
+            if (n == 8) idx = EIGHT;
+            if (n == 0) idx = ZERO;
+            l = Move[L][idx];
+            r = Move[R][idx];
+            if (l == r) {
+                if (hand == "right") {
+                    answer += 'R';
+                    R = idx;
+                } else {
+                    answer += 'L';
+                    L = idx;
+                }
+            } else {
+                if (l < r) {
+                    answer += 'L';
+                    L = idx;
+                } else {
+                    answer += 'R';
+                    R = idx;
+                }
+            }
+        }
+    }
+    return answer;
+}
