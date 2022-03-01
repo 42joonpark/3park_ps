@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<vector<int>> board, vector<int> moves) {
+    int size = board.size();
+    int answer = 0;
+    vector<int> box;
+    for (auto move : moves) {
+        for (int i = 0; i < size; ++i) {
+            if (board[i][move - 1] != 0) {
+                box.push_back(board[i][move - 1]);
+                board[i][move - 1] = 0;
+                break;
+            }
+        }
+        if (box.size() > 1 && box[box.size() - 1] == box[box.size() - 2]) {
+            answer += 2;
+            box.pop_back();
+            box.pop_back();
+        }
+    }
+    return answer;
+}
