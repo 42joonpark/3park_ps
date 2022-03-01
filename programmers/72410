@@ -1,0 +1,39 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(string new_id) {
+    string answer = "";
+   	
+    for (int i = 0; i < new_id.size(); ++i) {
+        new_id[i] = tolower(new_id[i]);
+    }
+    for (int i = 0; i < new_id.size(); ++i) {
+        char c = new_id[i];
+        if (isalpha(c)) answer += c;
+        if (isdigit(c)) answer += c;
+        if (c == '-') answer += c;
+        if (c == '_') answer += c;
+        if (c == '.') {
+            if (answer.size() == 0) continue;
+            if (answer[answer.size() - 1] == '.') continue;
+            answer += c;
+        }
+    }
+    if (answer[answer.size() - 1] == '.')
+        answer = answer.substr(0, answer.size() - 1);
+    if (answer.empty())
+        answer += 'a';
+    if (answer.size() > 15)
+        answer = answer.substr(0, 15);
+    if (answer[answer.size() - 1] == '.')
+        answer = answer.substr(0, 14);
+    if (answer.size() == 1) {
+        answer += answer[answer.size() - 1];
+        answer += answer[answer.size() - 1];
+    }
+    if (answer.size() == 2)
+        answer += answer[answer.size() - 1];
+    return answer;
+}
