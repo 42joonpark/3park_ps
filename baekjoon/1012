@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
+#include <cstdio>
+
+using namespace std;
+
+int map[50][50];
+int visit[50][50];
+int T, M, N, K, ans;
+int dx[4] = {0, 0, 1, -1};
+int dy[4] = {1, -1, 0, 0};
+
+void BFS(int y, int x) {
+	vector<pair<int, int> > q;
+
+	q.push_back(make_pair(y, x));
+	while (!q.empty()) {
+		int cur_y = q.front().first;
+		int cur_x = q.front().second;
+		map[cur_y][cur_x] = 0;
+		visit[cur_y][cur_x] = 1;
+		q.erase(q.begin());
+		for (int i = 0; i < 4; ++i) {
+			int next_y = cur_y + dy[i];
+			int next_x = cur_x + dx[i];
+			if (next_y < 0 || next_y >= N || next_x < 0 || next_x >= M) continue;
+			if (map[next_y][next_x] == 0) continue;
+			if (visit[next_y][next_x] == 1) continue;
+			q.push_back(make_pair(next_y, next_x));
+			visit[next_y][next_x] = 1;
+			map[next_y][next_x] = 0;
+		}
+	}
+}
+
+int main() {
+	scanf("%d\n", &T);
+	while (--T >= 0) {
+		scanf("%d %d %d\n", &M, &N, &K);
+		for (int i = 0; i < K; ++i) {
+			int x, y;
+			scanf("%d %d\n", &x, &y);
+			map[y][x] = 1;
+		}
+		ans = 0;
+		for (int y = 0; y < N; ++y) {
+			for (int x = 0; x < M; ++x) {
+				if (map[y][x] == 1) {
+					BFS(y, x);
+					++ans;
+				}
+			}
+		}
+		printf("%d\n", ans);
+		memset(map, 0, 50 * 50 * sizeof(int));
+		memset(visit, 0, 50 * 50 * sizeof(int));
+	}
+} 
