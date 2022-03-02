@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
+
+using namespace std;
+
+int map[1001][1001];
+int visit[1001];
+int N, M, V;
+
+void DFS() {
+	vector<int> s;
+
+	s.push_back(V);
+	while (!s.empty()) {
+		int cur = s.back();
+		s.pop_back();
+		if (visit[cur] == 0)
+			cout << cur << " ";
+		visit[cur] = 1;
+		for (int i = N; i >= 1; --i) {
+			if (map[cur][i] == 1 && visit[i] == 0)
+				s.push_back(i);
+		}
+	}
+	cout << endl;
+}
+
+void BFS() {
+	vector<int> q;
+
+	q.push_back(V);
+	while (!q.empty()) {
+		int cur = q.front();
+		q.erase(q.begin());
+		if (visit[cur] == 0)
+			cout << cur << " ";
+		visit[cur] = 1;
+		for (int i = 1; i <= N; ++i) {
+			if (map[cur][i] == 1 && visit[i] == 0)
+				q.push_back(i);
+		}
+	}
+	cout << endl;
+}
+
+int main() {
+	scanf("%d %d %d\n", &N, &M, &V);
+	for (int i = 0; i < M; ++i) {
+		int s, e;
+		scanf("%d %d\n", &s, &e);
+		map[s][e] = 1;
+		map[e][s] = 1;
+	}
+	DFS();
+	memset(visit, 0, 1001 * sizeof(int));
+	BFS();
+}
