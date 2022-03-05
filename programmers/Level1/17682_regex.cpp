@@ -8,40 +8,47 @@ using namespace std;
 
 int solution(string dartResult) {
 	int answer = 0;
+	stringstream ss(dartResult);
 	int sum[3] = {0, 0, 0};
-	int i = 0, j = 0;
 
-	while (i < dartResult.size()) {
-		int dlen = 0;
-		while (isdigit(dartResult[i])) {
-			sum[j] = sum[j] * pow(10, dlen) + (dartResult[i] - '0');
-			dlen++;
-			i++;
+	int score;
+	char bonus;
+	char option;
+
+
+	for (int i = 0; i < 3; i++) {
+		ss >> score;
+		bonus = ss.get();
+		option = ss.get();
+		if (option != '*' && option != '#')
+			ss.unget();
+		sum[i] += score;
+		switch(bonus) {
+			case 'S':
+				sum[i] = pow(score, 1);
+				break ;
+			case 'D':
+				sum[i] = pow(score, 2);
+				break ;
+			case 'T':
+				sum[i] = pow(score, 3);
+				break ;
+			default :
+				break ;
 		}
-
-
-
-		if (dartResult[i] == 'S')
-			sum[j] = pow(sum[j], 1);
-		else if (dartResult[i] == 'D')
-			sum[j] = pow(sum[j], 2);
-		else if (dartResult[i] == 'T')
-			sum[j] = pow(sum[j], 3);
-		i++;
-
-		if (!isdigit(dartResult[i])) {
-			if (dartResult[i] == '*') {
-				sum[j] *= 2;
+		switch(option){
+			case '*' :
 				if (i > 0)
-					sum[j - 1] *= 2;
-			} else if (dartResult[i] == '#') {
-				sum[j] *= -1;
-			}
-			i++;
+					sum[i - 1] *= 2;
+				sum[i] *= 2;
+				break ;
+			case '#' :
+				sum[i] *= -1;
+				break ;
+			default :
+				break ;
 		}
-		j++;
 	}
-
 	for (int i = 0; i < 3; i++) {
 		answer += sum[i];
 	}
