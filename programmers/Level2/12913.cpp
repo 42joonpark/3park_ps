@@ -7,16 +7,17 @@ using namespace std;
 int solution(vector<vector<int> > land)
 {
 	int answer = 0;
-	vector<int> tmp;
 	int row, curr, up;
+
 	for (row = 1; row < land.size(); ++row) {
 		for (curr = 0; curr < 4; ++curr) {
 			for (up = 0 ; up < 4; ++up) {
 				if (curr != up)
-					tmp.push_back(land[row][curr] + land[row - 1][up]);
+					if (answer < land[row][curr] + land[row - 1][up])
+						answer = land[row][curr] + land[row - 1][up];
 			}
-			land[row][curr] = *max_element(tmp.begin(), tmp.end());
-			tmp.clear();
+			land[row][curr] = answer;
+			answer = 0;
 		}
 	}
 	answer = *max_element(land[row - 1].begin(), land[row - 1].end());
