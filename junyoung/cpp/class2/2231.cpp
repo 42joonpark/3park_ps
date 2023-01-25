@@ -34,28 +34,25 @@ int main()
     // std::cout << sum << std::endl;
     int sum =0;
     int num = onum;
-    int tnum =0;
+    int tnum =num;
     int ssum = 0;
     int c =0;
     // 재귀 로 풀어보자 
     while (1)
     {
         //216 , 9 
-        //245
-        sum = spsum(num);
-
-        // 207 
-        // 234
-        tnum = num;
-        num = num - sum;
-        ssum = spsum(num);
+        sum = spsum(tnum);
+        tnum = tnum - sum;
+        ssum = spsum(tnum);
+        // std::cout << "tt " << tnum << " " << sum << " " << ssum <<"\n";
         // std::cout << num << std::endl;
-        if (num + ssum != tnum){
+        if (tnum + ssum != onum) {
             if (c == 0)
-                num = onum + sum;
+                tnum += sum;
+            tnum = tnum + sum;
             break;
         }
         c++;
     }
-    std::cout <<  num << std::endl;
+    std::cout << tnum << std::endl;
 }
