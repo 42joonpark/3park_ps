@@ -52,49 +52,30 @@ int main()
     for (int i=0; i<a; ++i) {
         std::cin >> line;
         s_list.push_back(line);
-    }    std::cout << s_list[1] << std::endl;
+    }    
+    // std::cout << s_list[1] << std::endl;
 
     std::string wb;
     wb = "WBWBWBWB";
     std::string bw;
     bw = "BWBWBWBW";
-    std::string temp;
-    temp = "WB";
-    for (int i =0; i < b-8; ++i)
-    {
-        wb += temp[i%2];
-        bw += temp[(i+1)%2];
-    }
+
+    // std::string temp;
+    // temp = "WB";
+    // for (int i =0; i < b-8; ++i)
+    // {
+    //     wb += temp[i%2];
+    //     bw += temp[(i+1)%2];
+    // }
+    int x = a-8+1;
+    int y = b-8+1;
+    std::vector< std::vector<std::string> > v(x, std::vector<std::string>(y));
+3    
     if (s_list[0][0] == 'B')
         swap(wb,bw);
     std::cout << wb << " " << bw << std::endl;
     //s_list -> sub_s_list;
     // diff(sub_s_list, wb,bw)
 
-    for
-    // int res=0; 
-    // for (int i=0; i<a; ++i) {
-    //     if ((i)%2 == 0)
-    //     {
-    //         if (wb == s_list[i])
-    //             continue;
-    //         else {
-    //             for(int j=0; j<b; ++j) {
-    //                 if (s_list[i][j] != wb[j])
-    //                     ++res;
-    //             }
-    //         }
-    //     }
-    //     else {
-    //         if (bw == s_list[i])
-    //             continue;
-    //         else {
-    //             for (int j=0; j<b; ++j) {
-    //                 if (s_list[i][j] != bw[j])
-    //                     ++res;
-    //             }
-    //         }
-    //     }
-    // }
-    std::cout << res << std::endl;
+    // std::cout << res << std::endl;
 }
