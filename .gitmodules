@@ -1,0 +1,3 @@
+[submodule "junyoung"]
+	path = junyoung
+	url = git@github.com:maindishes/algo-KKP.git
